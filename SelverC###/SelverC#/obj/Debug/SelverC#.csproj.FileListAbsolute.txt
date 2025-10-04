@@ -1,0 +1,13 @@
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\SelverC#.exe.config
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\SelverC#.exe
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\SelverC#.pdb
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\obj\Debug\SelverC#.csproj.AssemblyReference.cache
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\obj\Debug\SelverC#.csproj.CoreCompileInputs.cache
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\obj\Debug\SelverC#.exe
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\obj\Debug\SelverC#.pdb
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\obj\Debug\SelverC#.exe.config
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.dll
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.Encryption.dll
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.xml
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.Encryption.xml
+D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\obj\Debug\SelverC#.csproj.Up2Date
