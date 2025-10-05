@@ -15,6 +15,7 @@ interface Track {
   artist: string
   duration: string
   mood: string
+  url: string
 }
 
 export default function MusicPlayer({ playlist, weatherCode, temperature }: MusicPlayerProps) {
@@ -29,34 +30,34 @@ export default function MusicPlayer({ playlist, weatherCode, temperature }: Musi
     if (weatherCode === 0 && temperature >= 25) {
       // Sunny and warm - upbeat tracks
       tracks.push(
-        { title: "Sunshine Days", artist: "Beach Vibes Collective", duration: "3:45", mood: "Upbeat" },
-        { title: "Golden Hour", artist: "Summer Sounds", duration: "4:12", mood: "Energetic" },
-        { title: "Vitamin Sea", artist: "Ocean Waves", duration: "3:28", mood: "Happy" },
-        { title: "Beach House", artist: "Coastal Dreams", duration: "4:33", mood: "Chill" }
+        { title: "Sunshine Days", artist: "Beach Vibes Collective", duration: "3:45", mood: "Upbeat", url: "/audio/sunshine-days.mp3" },
+        { title: "Golden Hour", artist: "Summer Sounds", duration: "4:12", mood: "Energetic", url: "/audio/golden-hour.mp3" },
+        { title: "Vitamin Sea", artist: "Ocean Waves", duration: "3:28", mood: "Happy", url: "/audio/vitamin-sea.mp3" },
+        { title: "Beach House", artist: "Coastal Dreams", duration: "4:33", mood: "Chill", url: "/audio/beach-house.mp3" }
       )
     } else if (weatherCode >= 51 && weatherCode <= 67) {
       // Rainy - cozy tracks
       tracks.push(
-        { title: "Rainy Day Blues", artist: "Cozy Corner", duration: "4:15", mood: "Melancholic" },
-        { title: "Coffee Shop Vibes", artist: "Indie Folk", duration: "3:52", mood: "Warm" },
-        { title: "Window Watching", artist: "Soft Sounds", duration: "4:08", mood: "Peaceful" },
-        { title: "Thunder & Lightning", artist: "Storm Chasers", duration: "3:41", mood: "Dramatic" }
+        { title: "Rainy Day Blues", artist: "Cozy Corner", duration: "4:15", mood: "Melancholic", url: "/audio/rainy-day-blues.mp3" },
+        { title: "Coffee Shop Vibes", artist: "Indie Folk", duration: "3:52", mood: "Warm", url: "/audio/coffee-shop-vibes.mp3" },
+        { title: "Window Watching", artist: "Soft Sounds", duration: "4:08", mood: "Peaceful", url: "/audio/window-watching.mp3" },
+        { title: "Thunder & Lightning", artist: "Storm Chasers", duration: "3:41", mood: "Dramatic", url: "/audio/thunder-lightning.mp3" }
       )
     } else if (weatherCode >= 80) {
       // Stormy - dramatic tracks
       tracks.push(
-        { title: "Storm Symphony", artist: "Nature's Orchestra", duration: "5:22", mood: "Epic" },
-        { title: "Thunder Road", artist: "Electric Storm", duration: "4:17", mood: "Intense" },
-        { title: "Lightning Strike", artist: "Power Surge", duration: "3:33", mood: "Electric" },
-        { title: "After the Storm", artist: "Calm Waters", duration: "4:45", mood: "Serene" }
+        { title: "Storm Symphony", artist: "Nature's Orchestra", duration: "5:22", mood: "Epic", url: "/audio/storm-symphony.mp3" },
+        { title: "Thunder Road", artist: "Electric Storm", duration: "4:17", mood: "Intense", url: "/audio/thunder-road.mp3" },
+        { title: "Lightning Strike", artist: "Power Surge", duration: "3:33", mood: "Electric", url: "/audio/lightning-strike.mp3" },
+        { title: "After the Storm", artist: "Calm Waters", duration: "4:45", mood: "Serene", url: "/audio/after-the-storm.mp3" }
       )
     } else {
       // Default - balanced tracks
       tracks.push(
-        { title: "Perfect Day", artist: "Weather Channel", duration: "3:58", mood: "Balanced" },
-        { title: "Cloud Watching", artist: "Sky Gazers", duration: "4:21", mood: "Relaxed" },
-        { title: "Gentle Breeze", artist: "Wind Chimes", duration: "3:44", mood: "Soft" },
-        { title: "Nature's Rhythm", artist: "Earth Sounds", duration: "4:12", mood: "Natural" }
+        { title: "Perfect Day", artist: "Weather Channel", duration: "3:58", mood: "Balanced", url: "/audio/perfect-day.mp3" },
+        { title: "Cloud Watching", artist: "Sky Gazers", duration: "4:21", mood: "Relaxed", url: "/audio/cloud-watching.mp3" },
+        { title: "Gentle Breeze", artist: "Wind Chimes", duration: "3:44", mood: "Soft", url: "/audio/gentle-breeze.mp3" },
+        { title: "Nature's Rhythm", artist: "Earth Sounds", duration: "4:12", mood: "Natural", url: "/audio/natures-rhythm.mp3" }
       )
     }
     
@@ -65,16 +66,47 @@ export default function MusicPlayer({ playlist, weatherCode, temperature }: Musi
 
   const tracks = generateTracks()
 
+  useEffect(() => {
+    const audio = document.getElementById('weather-audio') as HTMLAudioElement | null
+    if (audio) {
+      audio.src = tracks[currentTrack].url
+    }
+    // Try to play on first user interaction
+  }, [currentTrack, weatherCode, temperature])
+
   const nextTrack = () => {
-    setCurrentTrack((prev) => (prev + 1) % tracks.length)
+    setCurrentTrack((prev) => {
+      const next = (prev + 1) % tracks.length
+      const audio = document.getElementById('weather-audio') as HTMLAudioElement | null
+      if (audio) {
+        audio.src = tracks[next].url
+        if (isPlaying) audio.play().catch(() => {})
+      }
+      return next
+    })
   }
 
   const prevTrack = () => {
-    setCurrentTrack((prev) => (prev - 1 + tracks.length) % tracks.length)
+    setCurrentTrack((prev) => {
+      const next = (prev - 1 + tracks.length) % tracks.length
+      const audio = document.getElementById('weather-audio') as HTMLAudioElement | null
+      if (audio) {
+        audio.src = tracks[next].url
+        if (isPlaying) audio.play().catch(() => {})
+      }
+      return next
+    })
   }
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying)
+    const audio = document.getElementById('weather-audio') as HTMLAudioElement | null
+    if (!audio) return
+    if (!isPlaying) {
+      audio.play().catch(() => {})
+    } else {
+      audio.pause()
+    }
   }
 
   return (
@@ -93,6 +125,9 @@ export default function MusicPlayer({ playlist, weatherCode, temperature }: Musi
           </span>
         </div>
       </div>
+
+      {/* Hidden audio element */}
+      <audio id="weather-audio" src={tracks[currentTrack].url} preload="auto" />
 
       {/* Current Track */}
       <div className="mb-6">

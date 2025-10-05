@@ -1,25 +1,76 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Camera, MapPin, Clock, Star, Lightbulb, Target } from 'lucide-react'
+import { Camera, MapPin, Clock, Lightbulb, Target } from 'lucide-react'
 
 interface PhotoSuggestionsProps {
   photoTip: string
   weatherCode: number
   temperature: number
   location: string
+  lat?: number
+  lng?: number
 }
 
 interface PhotoSpot {
   name: string
   description: string
   bestTime: string
-  difficulty: 'Easy' | 'Medium' | 'Hard'
   tags: string[]
   icon: string
+  lat?: number
+  lng?: number
 }
 
-export default function PhotoSuggestions({ photoTip, weatherCode, temperature, location }: PhotoSuggestionsProps) {
+export default function PhotoSuggestions({ photoTip, weatherCode, temperature, location, lat, lng }: PhotoSuggestionsProps) {
+  // If coordinates are available, we will fetch a few real nearby POIs using Overpass API
+  // This is a light query for cafés, viewpoints, and museums
+  // We keep a fallback to generated spots if the network fails
+  const [nearby, setNearby] = useState<PhotoSpot[] | null>(null)
+
+  useEffect(() => {
+    async function fetchPOI() {
+      if (lat == null || lng == null) return
+      try {
+        const radius = 2000 // 2km
+        const query = `[
+          out:json
+        ];(
+          node["tourism"="museum"](around:${radius},${lat},${lng});
+          node["tourism"="viewpoint"](around:${radius},${lat},${lng});
+          node["amenity"="cafe"](around:${radius},${lat},${lng});
+        );out 6;`;
+        const res = await fetch('https://overpass-api.de/api/interpreter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ data: query }).toString()
+        })
+        if (!res.ok) throw new Error('Overpass API error')
+        const data = await res.json()
+        const elements = Array.isArray(data.elements) ? data.elements : []
+        const mapped: PhotoSpot[] = elements.slice(0, 8).map((el: any) => {
+          const latEl = el.lat ?? el.center?.lat
+          const lonEl = el.lon ?? el.center?.lon
+          const primary = el.tags?.name || el.tags?.brand || el.tags?.operator
+          const category = el.tags?.tourism || el.tags?.amenity || el.tags?.leisure || 'Spot'
+          return {
+            name: primary ? `${primary}` : `${category}`,
+            description: el.tags?.description || `Notable ${category} nearby` ,
+            bestTime: 'Any Time',
+            tags: [category, 'Nearby'],
+            icon: el.tags?.amenity === 'cafe' ? '☕' : (el.tags?.tourism === 'viewpoint' ? '🌄' : (el.tags?.tourism === 'museum' ? '🏛️' : '📍')),
+            lat: latEl,
+            lng: lonEl
+          }
+        })
+        if (mapped.length) setNearby(mapped)
+      } catch {
+        // ignore, we'll fallback
+      }
+    }
+    fetchPOI()
+  }, [lat, lng])
   const generatePhotoSpots = (): PhotoSpot[] => {
     const spots: PhotoSpot[] = []
     
@@ -124,16 +175,9 @@ export default function PhotoSuggestions({ photoTip, weatherCode, temperature, l
     return spots
   }
 
-  const photoSpots = generatePhotoSpots()
+  const photoSpots = nearby ?? generatePhotoSpots()
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Easy': return 'bg-green-100 text-green-600'
-      case 'Medium': return 'bg-yellow-100 text-yellow-600'
-      case 'Hard': return 'bg-red-100 text-red-600'
-      default: return 'bg-gray-100 text-gray-600'
-    }
-  }
+  // difficulty labels removed per UX request
 
   const getWeatherTips = () => {
     if (weatherCode === 0) {
@@ -210,16 +254,23 @@ export default function PhotoSuggestions({ photoTip, weatherCode, temperature, l
                   <div>
                     <h5 className="font-semibold text-gray-800">{spot.name}</h5>
                     <p className="text-sm text-gray-600 mb-2">{spot.description}</p>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 flex-wrap">
                       <Clock className="w-3 h-3 text-gray-400" />
                       <span className="text-xs text-gray-500">{spot.bestTime}</span>
-                      <span className={`text-xs px-2 py-1 rounded-full ${getDifficultyColor(spot.difficulty)}`}>
-                        {spot.difficulty}
-                      </span>
+                      {spot.lat && spot.lng && (
+                        <a
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}&query_place_id=&query_coordinate=${spot.lat},${spot.lng}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-blue-600 hover:underline"
+                        >
+                          View on Maps
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
-                <Star className="w-4 h-4 text-yellow-400" />
+                
               </div>
               <div className="flex flex-wrap gap-1 mt-3">
                 {spot.tags.map((tag, tagIndex) => (

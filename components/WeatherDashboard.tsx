@@ -160,7 +160,7 @@ export default function WeatherDashboard({ weatherData }: WeatherDashboardProps)
       {/* Main Content Grid */}
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Day Plan */}
-        <motion.div
+        <motion.div id="dayplan"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -231,6 +231,27 @@ export default function WeatherDashboard({ weatherData }: WeatherDashboardProps)
             </div>
             <p className="text-sm text-gray-500 mt-2">{weatherData.dayPlan.daylight}</p>
           </div>
+          {/* Music Player (moved to left to balance layout) */}
+          <div id="music">
+            <MusicPlayer 
+              playlist={weatherData.outfit.playlist}
+              weatherCode={weatherData.weatherCode}
+              temperature={weatherData.maxTemp}
+            />
+          </div>
+
+          {/* Photo Suggestions (moved to left) */}
+          <div id="photos">
+            <PhotoSuggestions
+              photoTip={weatherData.creative.photoTip}
+              weatherCode={weatherData.weatherCode}
+              temperature={weatherData.maxTemp}
+              location={weatherData.location}
+              lat={weatherData.coordinates.lat}
+              lng={weatherData.coordinates.lng}
+            />
+          </div>
+
         </motion.div>
 
         {/* Sidebar */}
@@ -263,7 +284,7 @@ export default function WeatherDashboard({ weatherData }: WeatherDashboardProps)
           </motion.div>
 
           {/* Music & Creative */}
-          <motion.div
+          <motion.div id="music"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -286,7 +307,7 @@ export default function WeatherDashboard({ weatherData }: WeatherDashboardProps)
           </motion.div>
 
           {/* Mini Challenge */}
-          <motion.div
+          <motion.div id="local"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -302,20 +323,7 @@ export default function WeatherDashboard({ weatherData }: WeatherDashboardProps)
             </div>
           </motion.div>
 
-          {/* Music Player */}
-          <MusicPlayer 
-            playlist={weatherData.outfit.playlist}
-            weatherCode={weatherData.weatherCode}
-            temperature={weatherData.maxTemp}
-          />
-
-          {/* Photo Suggestions */}
-          <PhotoSuggestions
-            photoTip={weatherData.creative.photoTip}
-            weatherCode={weatherData.weatherCode}
-            temperature={weatherData.maxTemp}
-            location={weatherData.location}
-          />
+          {/* Right column now focuses on Outfit and Daily Challenge */}
         </div>
       </div>
     </div>

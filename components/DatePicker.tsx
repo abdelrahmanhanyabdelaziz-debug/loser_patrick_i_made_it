@@ -111,7 +111,7 @@ export default function DatePicker({ selectedDate, onDateChange, placeholder = "
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-left bg-white hover:bg-gray-50"
+        className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-left bg-white hover:bg-gray-50 text-gray-900"
       >
         {selectedDate ? formatDate(selectedDate) : placeholder}
       </button>
@@ -165,7 +165,7 @@ export default function DatePicker({ selectedDate, onDateChange, placeholder = "
                     className={`
                       relative p-2 text-sm rounded-lg transition-all duration-200
                       ${!date ? 'invisible' : ''}
-                      ${isDateDisabled(date) ? 'text-gray-300 cursor-not-allowed' : 'hover:bg-blue-50 cursor-pointer'}
+                      ${isDateDisabled(date) ? 'text-gray-300 cursor-not-allowed' : 'hover:bg-blue-50 cursor-pointer text-gray-700'}
                       ${isDateSelected(date) ? 'bg-blue-500 text-white font-semibold' : ''}
                       ${isToday(date) && !isDateSelected(date) ? 'bg-blue-100 text-blue-600 font-semibold' : ''}
                     `}

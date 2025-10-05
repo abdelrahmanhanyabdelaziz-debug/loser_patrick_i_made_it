@@ -145,6 +145,11 @@ export default function LandingFeatures() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-purple-600 px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={() => {
+                const el = document.querySelector('input[placeholder="Enter city name..."]') as HTMLElement | null
+                el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                el?.focus()
+              }}
             >
               Get Started Now
             </motion.button>

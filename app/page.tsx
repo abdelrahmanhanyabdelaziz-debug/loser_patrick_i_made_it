@@ -130,7 +130,7 @@ export default function Home() {
                     placeholder="Enter city name..."
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                    className="w-full pl-12 pr-4 py-4 text-lg border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white text-gray-900 placeholder-gray-500"
                   />
                 </div>
 
@@ -171,15 +171,23 @@ export default function Home() {
               className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
             >
               {[
-                { icon: <Coffee className="w-8 h-8" />, text: "Activities" },
-                { icon: <Music className="w-8 h-8" />, text: "Playlists" },
-                { icon: <Camera className="w-8 h-8" />, text: "Photo Spots" },
-                { icon: <Heart className="w-8 h-8" />, text: "Local Tips" },
+                { icon: <Coffee className="w-8 h-8" />, text: "Activities", target: 'dayplan' },
+                { icon: <Music className="w-8 h-8" />, text: "Playlists", target: 'music' },
+                { icon: <Camera className="w-8 h-8" />, text: "Photo Spots", target: 'photos' },
+                { icon: <Heart className="w-8 h-8" />, text: "Local Tips", target: 'local' },
               ].map((feature, index) => (
                 <motion.div
                   key={index}
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="flex flex-col items-center space-y-2 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/20 hover:bg-white/80 transition-all duration-300"
+                  onClick={() => {
+                    if (!showResults || !weatherData) {
+                      toast("Search a city and date first to view details")
+                      return
+                    }
+                    const el = document.getElementById(feature.target)
+                    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }}
+                  className="cursor-pointer flex flex-col items-center space-y-2 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-white/20 hover:bg-white/80 transition-all duration-300"
                 >
                   <div className="text-blue-500">{feature.icon}</div>
                   <span className="text-sm font-medium text-gray-700">{feature.text}</span>
