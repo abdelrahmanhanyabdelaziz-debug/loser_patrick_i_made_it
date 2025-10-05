@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Abdelrahman Hany\\source\\repos\\loser_patrick_i_made_it\\this\\SelverC###\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F80A4E88-C8A2-4010-A94E-F72032C45A39}|SelverC#\\SelverC#.csproj|c:\\users\\abdelrahman hany\\source\\repos\\loser_patrick_i_made_it\\this\\selverc###\\selverc#\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80A4E88-C8A2-4010-A94E-F72032C45A39}|SelverC#\\SelverC#.csproj|solutionrelative:selverc#\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Abdelrahman Hany\\source\\repos\\loser_patrick_i_made_it\\this\\SelverC###\\SelverC#\\Program.cs",
+              "RelativeDocumentMoniker": "SelverC#\\Program.cs",
+              "ToolTip": "C:\\Users\\Abdelrahman Hany\\source\\repos\\loser_patrick_i_made_it\\this\\SelverC###\\SelverC#\\Program.cs",
+              "RelativeToolTip": "SelverC#\\Program.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAAIwBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T06:17:18.183Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -11,3 +11,16 @@ D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.E
 D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.xml
 D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.Encryption.xml
 D:\Abdelrahman Hany\source\repos\SelverC###\SelverC#\obj\Debug\SelverC#.csproj.Up2Date
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\bin\Debug\SelverC#.exe.config
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\bin\Debug\SelverC#.exe
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\bin\Debug\SelverC#.pdb
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.Encryption.dll
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\bin\Debug\Newtonsoft.Json.Encryption.xml
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\obj\Debug\SelverC#.csproj.AssemblyReference.cache
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\obj\Debug\SelverC#.exe.config
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\obj\Debug\SelverC#.csproj.CoreCompileInputs.cache
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\obj\Debug\SelverC#.csproj.Up2Date
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\obj\Debug\SelverC#.exe
+C:\Users\Abdelrahman Hany\source\repos\loser_patrick_i_made_it\this\SelverC###\SelverC#\obj\Debug\SelverC#.pdb
